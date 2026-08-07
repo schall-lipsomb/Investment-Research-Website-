@@ -1,5 +1,25 @@
+Investment.py --
+
 debt_to_equity: 78.445 — Yahoo reports this as a percentage-style number, so this means Apple's debt is roughly 0.78x its equity — moderate leverage for a mega-cap.
+
 revenue_growth: 0.164 — this is a decimal, meaning 16.4% revenue growth (× 100 when displaying this later so it reads naturally).
+
 market_cap: 4,572,794,322,944 — that's ~$4.57 trillion, formatted as a raw integer. Convert this to something readable like "$4.57T" for the website.
 
 I needed to install yfinance and flask for website
+
+
+app.py  --
+
+from investment import get_company_data — this pulls in the function you already wrote and tested in investment.py.
+This is why we built and tested it standalone first: now we can reuse it instead of rewriting it.
+
+app = Flask(__name__) — creates your actual web application object. Almost every Flask project starts this exact way.
+
+@app.route("/") — this is called a decorator (the @ symbol). In English: "when someone visits the homepage URL (/), run the function right below me." 
+This is the core magic of how Flask connects a URL to a piece of Python code.
+
+render_template("home.html", company=company) — this tells Flask "go find an HTML file called home.html, and hand it the company data so the HTML can display it." 
+
+app.run(debug=True) — starts the server. debug=True means if you make an error, 
+Flask shows you a helpful error page in the browser instead of just crashing silently — very useful while learning.
