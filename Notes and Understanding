@@ -23,3 +23,8 @@ render_template("home.html", company=company) — this tells Flask "go find an H
 
 app.run(debug=True) — starts the server. debug=True means if you make an error, 
 Flask shows you a helpful error page in the browser instead of just crashing silently — very useful while learning.
+
+
+Template Folder: home.html
+
+Standard home page basics, DOCTYPE, head, body, etc.
