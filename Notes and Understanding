@@ -1,3 +1,5 @@
 debt_to_equity: 78.445 — Yahoo reports this as a percentage-style number, so this means Apple's debt is roughly 0.78x its equity — moderate leverage for a mega-cap.
 revenue_growth: 0.164 — this is a decimal, meaning 16.4% revenue growth (× 100 when displaying this later so it reads naturally).
 market_cap: 4,572,794,322,944 — that's ~$4.57 trillion, formatted as a raw integer. Convert this to something readable like "$4.57T" for the website.
+
+I needed to install yfinance and flask for website
