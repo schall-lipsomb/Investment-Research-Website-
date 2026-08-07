@@ -11,7 +11,7 @@ I needed to install yfinance and flask for website
 
 app.py  --
 
-from investment import get_company_data — this pulls in the function you already wrote and tested in investment.py.
+from investment import get_company_data — this pulls in the function I already wrote and tested in investment.py.
 This is why I built and tested it standalone first: now I can reuse it instead of rewriting it.
 
 app = Flask(__name__) — creates your actual web application object. Almost every Flask project starts this exact way.
