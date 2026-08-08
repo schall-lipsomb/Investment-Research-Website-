@@ -1,12 +1,101 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ company.name }}</title>
-</head>
-<body>
-    <h1>{{ company.name }}</h1>
-    <p>Current Price: ${{ company.current_price }}</p>
-    <p>Debt to Equity: {{ company.debt_to_equity }}</p>
-    <p>Revenue Growth: {{ company.revenue_growth }}</p>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}{{ company.name }}{% endblock %}
+
+{% block content %}
+    <h1 class="company-name">{{ company.name }}</h1>
+    <div class="company-ticker">{{ company.ticker }}</div>
+
+    <canvas id="priceChart" style="margin-top: 2rem;"></canvas>
+
+    <div class="ledger">
+        <div class="ledger-row">
+            <span class="ledger-label">Current Price</span>
+            <span class="ledger-value">${{ company.current_price }}</span>
+        </div>
+        <div class="ledger-row">
+            <span class="ledger-label">Debt to Equity</span>
+            <span class="ledger-value">{{ company.debt_to_equity }}</span>
+        </div>
+        <div class="ledger-row">
+            <span class="ledger-label">Revenue Growth</span>
+            <span class="ledger-value">{{ company.revenue_growth }}</span>
+        </div>
+        <div class="ledger-row">
+            <span class="ledger-label">Risk Classification</span>
+            <span class="ledger-value">{{ risk }}</span>
+        </div>
+        <div class="ledger-row">
+            <span class="ledger-label">Market Cap</span>
+            <span class="ledger-value">{{ company.market_cap }}</span>
+        </div>
+    </div>
+
+    <p style="color: var(--parchment-dim); font-size: 0.8rem; margin-top: 0.5rem;">
+        Risk classification is a simplified educational model trained on a small hand-labeled dataset — not financial advice.
+    </p>
+
+    {% if is_watched %}
+        <a href="{{ url_for('remove_watch', ticker=ticker) }}" class="action-link">Remove from Watchlist</a>
+    {% else %}
+        <a href="{{ url_for('add_watch', ticker=ticker) }}" class="action-link">Add to Watchlist</a>
+    {% endif %}
+
+    <h2 class="company-name" style="font-size: 1.4rem; margin-top: 3rem;">Annual Revenue</h2>
+    <canvas id="revenueChart" style="margin-top: 1rem;"></canvas>
+
+    <script>
+        fetch("/api/history/{{ company.ticker }}")
+            .then(response => response.json())
+            .then(data => {
+                const ctx = document.getElementById('priceChart');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: data.dates,
+                        datasets: [{
+                            label: 'Close Price',
+                            data: data.prices,
+                            borderColor: '#2ECC71',
+                            backgroundColor: 'rgba(46, 204, 113, 0.1)',
+                            borderWidth: 2,
+                            pointRadius: 0,
+                            tension: 0.1,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            x: { ticks: { color: '#999999', maxTicksLimit: 6 }, grid: { color: '#2A2A2A' } },
+                            y: { ticks: { color: '#999999' }, grid: { color: '#2A2A2A' } }
+                        },
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            });
+
+        fetch("/api/revenue/{{ company.ticker }}")
+            .then(response => response.json())
+            .then(data => {
+                const ctx = document.getElementById('revenueChart');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.years,
+                        datasets: [{
+                            label: 'Revenue',
+                            data: data.revenue,
+                            backgroundColor: '#2ECC71'
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            x: { ticks: { color: '#999999' }, grid: { display: false } },
+                            y: { ticks: { color: '#999999' }, grid: { color: '#2A2A2A' } }
+                        },
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            });
+    </script>
+{% endblock %}
