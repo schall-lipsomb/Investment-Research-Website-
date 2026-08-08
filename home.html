@@ -1,10 +1,32 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Investment Research</title>
-</head>
-<body>
-    <h1>Investment Research Dashboard</h1>
-    <p>Try visiting <a href="/company/NVDA">/company/NVDA</a> or <a href="/company/TSLA">/company/TSLA</a></p>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <h1 class="company-name">Your Watchlist</h1>
+
+    <form action="{{ url_for('search') }}" method="GET" style="margin: 1.5rem 0; display: flex; gap: 0.5rem;">
+        <input
+            type="text"
+            name="ticker"
+            placeholder="Enter a ticker (e.g. AAPL, VOO, ^GSPC)"
+            style="flex: 1; padding: 0.6rem; background: var(--ink-light); border: 1px solid var(--hairline); color: var(--parchment); font-family: 'IBM Plex Mono', monospace;"
+        >
+        <button type="submit" class="action-link" style="margin-top: 0; cursor: pointer; background: none;">
+            Search
+        </button>
+    </form>
+
+    {% if companies %}
+        <div class="ledger">
+        {% for company in companies %}
+            <a href="{{ url_for('company_profile', ticker=company.ticker) }}" class="watchlist-item">
+                <span class="watchlist-name">{{ company.name }} <span class="company-ticker">{{ company.ticker }}</span></span>
+                <span class="watchlist-price">${{ company.current_price }}</span>
+            </a>
+        {% endfor %}
+        </div>
+    {% else %}
+        <p class="empty-state">Your watchlist is empty. Search for a ticker above to get started.</p>
+    {% endif %}
+{% endblock %}
