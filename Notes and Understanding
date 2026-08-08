@@ -106,3 +106,9 @@ HOME.HTML
     <p>Try visiting <a href="/company/AAPL">/company/AAPL</a> or <a href="/company/TSLA">/company/TSLA</a></p>
 </body>
 </html>
+
+
+
+Watchlist.py
+
+watchlist.json file is the actual proof that persistence is working — real data, sitting on my disk, independent of my browser or Flask running
