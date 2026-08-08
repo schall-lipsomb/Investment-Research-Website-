@@ -1,4 +1,4 @@
-Investment.py --
+INVESTMENT.PY --
 
 debt_to_equity: 78.445 — Yahoo reports this as a percentage-style number, so this means Apple's debt is roughly 0.78x its equity — moderate leverage for a mega-cap.
 
@@ -9,7 +9,8 @@ market_cap: 4,572,794,322,944 — that's ~$4.57 trillion, formatted as a raw int
 I needed to install yfinance and flask for website
 
 
-app.py  --
+
+APP.PY --
 
 from investment import get_company_data — this pulls in the function I already wrote and tested in investment.py.
 This is why I built and tested it standalone first: now I can reuse it instead of rewriting it.
@@ -24,7 +25,27 @@ render_template("home.html", company=company) — this tells Flask "go find an H
 app.run(debug=True) — starts the server. debug=True means if you make an error, 
 Flask shows you a helpful error page in the browser instead of just crashing silently — very useful while learning.
 
+Later updated to this->
 
-Template Folder: home.html
+from flask import Flask, render_template
+from investment import get_company_data
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return render_template("home.html")
+
+@app.route("/company/<ticker>")
+def company_profile(ticker):
+    company = get_company_data(ticker)
+    return render_template("company.html", company=company)
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+
+
+TEMPLATE FOLDER: home.html --
 
 Standard home page basics, DOCTYPE, head, body, etc.
