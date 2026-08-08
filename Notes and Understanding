@@ -15,7 +15,7 @@ APP.PY --
 from investment import get_company_data — this pulls in the function I already wrote and tested in investment.py.
 This is why I built and tested it standalone first: now I can reuse it instead of rewriting it.
 
-app = Flask(__name__) — creates your actual web application object. Almost every Flask project starts this exact way.
+app = Flask(__name__) — creates actual web application object. Almost every Flask project starts this exact way.
 
 @app.route("/") — this is called a decorator (the @ symbol). In English: "when someone visits the homepage URL (/), run the function right below me." 
 This is the core magic of how Flask connects a URL to a piece of Python code.
@@ -49,3 +49,60 @@ if __name__ == "__main__":
 TEMPLATE FOLDER: home.html --
 
 Standard home page basics, DOCTYPE, head, body, etc.
+
+
+COMPANY.HTML
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ company.name }}</title>
+</head>
+<body>
+    <h1>{{ company.name }}</h1>
+    <p>Current Price: ${{ company.current_price }}</p>
+    <p>Debt to Equity: {{ company.debt_to_equity }}</p>
+    <p>Revenue Growth: {{ company.revenue_growth }}</p>
+    <p>Market Cap: {{ company.market_cap }}</p>
+
+    {% if is_watched %}
+        <a href="{{ url_for('remove_watch', ticker=ticker) }}">Remove from Watchlist</a>
+    {% else %}
+        <a href="{{ url_for('add_watch', ticker=ticker) }}">Add to Watchlist</a>
+    {% endif %}
+
+    <p><a href="{{ url_for('home') }}">Back to Dashboard</a></p>
+</body>
+</html>
+
+
+
+
+HOME.HTML
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Investment Research</title>
+</head>
+<body>
+    <h1>Investment Research Dashboard</h1>
+
+    <h2>Your Watchlist</h2>
+    {% if companies %}
+        <ul>
+        {% for company in companies %}
+            <li>
+                <a href="{{ url_for('company_profile', ticker=company.name) }}">
+                    {{ company.name }} — ${{ company.current_price }}
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Your watchlist is empty. Try visiting a company page to add one.</p>
+    {% endif %}
+
+    <p>Try visiting <a href="/company/AAPL">/company/AAPL</a> or <a href="/company/TSLA">/company/TSLA</a></p>
+</body>
+</html>
