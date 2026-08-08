@@ -1,0 +1,156 @@
+/* ===== Base ===== */
+:root {
+    --ink: #0A0A0A;
+    --ink-light: #161616;
+    --parchment: #FFFFFF;
+    --parchment-dim: #999999;
+    --brass: #2ECC71;
+    --gain: #2ECC71;
+    --loss: #E74C3C;
+    --hairline: #2A2A2A;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--ink);
+    color: var(--parchment);
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* ===== Header ===== */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    border-bottom: 1px solid var(--hairline);
+}
+
+.site-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    color: var(--parchment);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+}
+
+.site-title span {
+    color: var(--brass);
+}
+
+.site-header nav a {
+    color: var(--parchment-dim);
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.site-header nav a:hover {
+    color: var(--brass);
+}
+
+/* ===== Page layout ===== */
+.page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+}
+
+/* ===== Ledger rows (the signature element) ===== */
+.ledger {
+    border-top: 1px solid var(--hairline);
+    margin: 1.5rem 0;
+}
+
+.ledger-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--hairline);
+    gap: 1rem;
+}
+
+.ledger-label {
+    color: var(--parchment-dim);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+}
+
+.ledger-value {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.05rem;
+    white-space: nowrap;
+}
+
+.ledger-value.gain {
+    color: var(--gain);
+}
+
+.ledger-value.loss {
+    color: var(--loss);
+}
+
+/* ===== Company header ===== */
+.company-name {
+    font-family: 'Fraunces', serif;
+    font-size: 2.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.company-ticker {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--brass);
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+}
+
+/* ===== Buttons / links as actions ===== */
+.action-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid var(--brass);
+    color: var(--brass);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.action-link:hover {
+    background-color: var(--brass);
+    color: var(--ink);
+}
+
+/* ===== Watchlist ===== */
+.watchlist-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--hairline);
+    text-decoration: none;
+    color: var(--parchment);
+}
+
+.watchlist-item:hover .watchlist-name {
+    color: var(--brass);
+}
+
+.watchlist-price {
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+.empty-state {
+    color: var(--parchment-dim);
+    font-style: italic;
+    padding: 1.5rem 0;
+}
