@@ -112,3 +112,16 @@ HOME.HTML
 Watchlist.py
 
 watchlist.json file is the actual proof that persistence is working — real data, sitting on my disk, independent of my browser or Flask running
+
+
+
+MAKE IT LOOK NICE FOR A WEBSITE
+
+The plan:
+
+Colors: deep ledger-green background (
+#1B2321), parchment text (
+#EDE6D6), brass accent for links/actions (
+#B08968), forest green for gains (
+#4C7A5D), rust for losses (
+#A6453D)
