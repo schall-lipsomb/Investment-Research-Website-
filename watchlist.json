@@ -1,0 +1,9 @@
+[
+	"^GSPC", "^DJI", "VGT", "VTV", "VXUS", "VOO", "VTI", "VUG", "VYM",
+	"XLF", "XLY", "NVDA", "SPY", "QQQ", "AAPL", "TSLA", "AMZN", "MSFT",
+	"GOOGL", "META", "BRK.B", "JPM", "JNJ", "V", "PG", "UNH", "HD",
+	"MA", "DIS", "BAC", "KO", "PFE", "CSCO", "ADBE", "NFLX", "PEP",
+	"XOM", "T", "CVX", "MRK", "WMT", "ABT", "CRM", "ORCL", "INTC",
+	"NKE", "MCD", "LLY", "COST", "ACN", "MDT", "NEE", "TXN", "BMY",
+	"QCOM", "AMGN", "HON", "UNP", "LOW", "SBUX", "UPS", "CAT", "IBM"
+]
